@@ -23,6 +23,7 @@ scalar AWSURL
 scalar AWSPhone
 
 schema {
+  query: Query
   mutation: Mutation
 }
 
@@ -45,4 +46,8 @@ type InviteFederationOwnerPayload {
 type Mutation {
   inviteClubOwner(input: InviteClubOwnerInput!): InviteClubOwnerPayload!
   inviteFederationOwner(input: InviteFederationOwnerInput!): InviteFederationOwnerPayload!
+}
+
+type Query {
+  test: String
 }
