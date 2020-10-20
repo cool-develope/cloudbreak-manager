@@ -1,0 +1,28 @@
+name: Upload schema to Apollo
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'schema.graphql'
+
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    container: 
+      image: node:lts
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Create clean schema
+      run: |
+        cat schema.graphql | awk '{sub(/ @aws_cognito_user_pools/,"")}1' | awk '{sub(/ @aws_api_key/,"")}1' > schema_public.graphql
+        cat schema_public.graphql
+
+    - name: Push schema to Apollo
+      env:
+        APOLLO_KEY_DEV: ${{ secrets.APOLLO_KEY_DEV }}
+      run: |
+        npx apollo service:push --graph=manager-api-dev --key=$APOLLO_KEY_DEV --variant=current --localSchemaFile=schema_public.graphql
