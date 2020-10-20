@@ -3,7 +3,7 @@ name: Upload schema to Apollo
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - 'schema.graphql'
 
