@@ -42,7 +42,6 @@ input InviteFederationOwnerInput {
   name: String
   email: String
   type: FederationType
-  ownerUserId: String
 }
 
 type InviteClubOwnerPayload {
