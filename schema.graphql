@@ -22,6 +22,13 @@ scalar AWSEmail
 scalar AWSURL
 scalar AWSPhone
 
+enum FederationType {
+  International
+  National
+  Regional
+  Local
+}
+
 schema {
   query: Query
   mutation: Mutation
@@ -32,7 +39,10 @@ input InviteClubOwnerInput {
 }
 
 input InviteFederationOwnerInput {
+  name: String
   email: String
+  type: FederationType
+  ownerUserId: String
 }
 
 type InviteClubOwnerPayload {
@@ -45,7 +55,9 @@ type InviteFederationOwnerPayload {
 
 type Mutation {
   inviteClubOwner(input: InviteClubOwnerInput!): InviteClubOwnerPayload!
+    @aws_auth(cognito_groups: ["tifo-manager"])
   inviteFederationOwner(input: InviteFederationOwnerInput!): InviteFederationOwnerPayload!
+    @aws_auth(cognito_groups: ["tifo-manager"])
 }
 
 type Query {
