@@ -9,7 +9,7 @@
     "watch": "tsc -w",
     "test": "jest",
     "cdk": "cdk",
-    "deploy": "echo $TIFO_ENV; npm run build && cdk synth && cdk deploy --profile tifo-$TIFO_ENV"
+    "deploy": "npm run build && cdk synth && cdk deploy --profile tifo-$TIFO_ENV"
   },
   "devDependencies": {
     "@aws-cdk/assert": "1.68.0",
