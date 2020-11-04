@@ -1,0 +1,14 @@
+{
+  "name": "invite-owner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "Sergey Onufrienko <sergey@onufrienko.com>",
+  "license": "ISC",
+  "dependencies": {
+    "generate-password": "^1.5.1",
+    "uuid": "^8.3.1"
+  }
+}

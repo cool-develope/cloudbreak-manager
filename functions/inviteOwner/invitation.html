@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      @font-face {
+        font-family: "RobotoRegular";
+        src: url("{{ domain }}/email/Roboto-Regular.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: "RobotoMedium";
+        src: url("{{ domain }}/email/Roboto-Medium.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: "RobotoBold";
+        src: url("{{ domain }}/email/Roboto-Bold.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: "SFProTextBold";
+        src: url("{{ domain }}/email/SFProText-Bold.ttf") format("truetype");
+      }
+      @font-face {
+        font-family: "SFProTextMedium";
+        src: url("{{ domain }}/email/SFProText-Bold.ttf") format("truetype");
+      }
+      body,
+      p {
+        margin: 0;
+        padding: 0;
+        font-family: "RobotoRegular", "Helvetica", sans-serif;
+      }
+      a {
+        font-size: 28px;
+        line-height: 34px;
+      }
+      .btn_link {
+        font-family: "RobotoMedium", "Helvetica", sans-serif;
+        background: #3054e5;
+        text-decoration: none;
+        display: block;
+        width: 446px;
+        height: 64px;
+        color: #ffffff !important;
+        border-radius: 6px;
+        padding-top: 26px;
+      }
+      .table-header {
+        height: 400px;
+        background-image: url({{ domain }}/email/Bg.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+      }
+      .header-text {
+        font-size: 32px;
+        color: #213174;
+        padding-top: 20px;
+        margin-left: 15px;
+        margin-right: 15px;
+        max-width: 600px;
+        line-height: 44px;
+      }
+      .info-text {
+        font-family: "SFProTextBold", "Helvetica", sans-serif;
+        font-size: 18px;
+        color: #737ea8;
+        margin-left: 15px;
+        margin-right: 15px;
+      }
+      .header-text-mark {
+        color: #3054e5;
+      }
+
+      @media screen and (max-width: 600px) {
+        table {
+          max-height: 700px;
+        }
+        .table-header {
+          height: 300px;
+        }
+        .btn_link {
+          width: 100%;
+        }
+        .header-text {
+          font-size: 26px;
+          max-width: 100%;
+          margin-bottom: 0;
+        }
+        .btn_link {
+          width: 90%;
+          height: 56px;
+          padding-top: 30px;
+          font-size: 20px;
+          line-height: 1;
+          margin-left: 15px;
+          margin-right: 15px;
+        }
+        .table_margin {
+          height: 40px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <table
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      border="0"
+      align="center"
+      class="body_table"
+    >
+      <tbody>
+        <tr>
+          <td width="100%" align="center" class="table-header">
+            <img src="{{ domain }}/email/Logo.png" alt="logo" width="165" height="165" />
+          </td>
+        </tr>
+        <tr>
+          <td width="100%" height="80" class="table_margin">&nbsp;</td>
+        </tr>
+        <tr>
+          <td align="center">
+            <h2 class="header-text">
+              Click the button to finish the registration for
+              <span class="header-text-mark">owner</span> role
+            </h2>
+          </td>
+        </tr>
+        <tr>
+          <td width="100%" height="30" class="table_margin">&nbsp;</td>
+        </tr>
+        <tr>
+          <td align="center">
+            <a href="{{ signin_url }}" class="btn_link" color="#FFFFFF!important"
+              >Complete the registration</a
+            >
+          </td>
+        </tr>
+        <tr>
+          <td width="100%" height="90" class="table_margin">&nbsp;</td>
+        </tr>
+        <tr>
+          <td width="100%" height="30">&nbsp;</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
