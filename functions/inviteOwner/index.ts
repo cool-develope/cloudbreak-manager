@@ -110,7 +110,7 @@ export const handler: Handler = async (event: Event): Promise<{ errors: string[]
   }
 
   if (fieldName === FieldName.inviteClubOwner) {
-    await sendEmail(CLUB_EMAIL_TEMPLATE, email, 'Cloub owner invitation');
+    await sendEmail(CLUB_EMAIL_TEMPLATE, email, 'Club owner invitation');
   } else if (fieldName === FieldName.inviteFederationOwner) {
     const pk = `federation#${uuidv4()}`;
     const sk = 'metadata';
