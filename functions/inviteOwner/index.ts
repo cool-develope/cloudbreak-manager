@@ -70,6 +70,18 @@ const sendEmail = async (templateFileName: string, emailAddress: string, subject
   await ses.sendEmail(params).promise();
 };
 
+const createUserInDynamoDB = async (userId: string = '', email: string) => {
+  const pk = `user#${userId}`;
+  const sk = 'metadata';
+
+  const userData = {
+    email,
+    createdAt: new Date().toISOString(),
+  };
+
+  await dynamoHelper.updateItem(pk, sk, userData);
+};
+
 interface Event {
   arguments: {
     input: {
@@ -108,6 +120,8 @@ export const handler: Handler = async (event: Event): Promise<{ errors: string[]
     errors.push(error);
     return { errors };
   }
+
+  await createUserInDynamoDB(ownerUserId, email);
 
   if (fieldName === FieldName.inviteClubOwner) {
     await sendEmail(CLUB_EMAIL_TEMPLATE, email, 'Club owner invitation');
