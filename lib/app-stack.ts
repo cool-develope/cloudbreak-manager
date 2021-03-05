@@ -11,6 +11,7 @@ import { CfnOutput } from '@aws-cdk/core';
 import { Certificate, ICertificate } from '@aws-cdk/aws-certificatemanager';
 import { CloudFrontWebDistribution, OriginProtocolPolicy } from '@aws-cdk/aws-cloudfront';
 import { UserPoolDefaultAction } from '@aws-cdk/aws-appsync';
+import { ResolverType } from './helper';
 import * as helper from './helper';
 
 const SCHEMA_FILE = '../schema.graphql';
@@ -63,6 +64,7 @@ export class AppStack extends cdk.Stack {
     const userPool = cognito.UserPool.fromUserPoolId(this, 'apiUserPool', COGNITO_USERPOOL_ID);
     this.api = this.createAppSync(userPool);
     this.inviteMutation();
+    this.users();
   }
 
   createAppSync(userPool: cognito.IUserPool) {
@@ -163,13 +165,30 @@ export class AppStack extends cdk.Stack {
     const dataSource = this.api.addLambdaDataSource('companyFn', fn);
 
     dataSource.createResolver({
-      typeName: 'Mutation',
+      typeName: ResolverType.Mutation,
       fieldName: 'inviteClubOwner',
     });
 
     dataSource.createResolver({
-      typeName: 'Mutation',
+      typeName: ResolverType.Mutation,
       fieldName: 'inviteFederationOwner',
+    });
+  }
+
+  users() {
+    const fn = helper.getFunction(this, 'users', {
+      MAIN_TABLE_NAME: this.mainTableName,
+      ES_DOMAIN: process.env.AWS_ES_DOMAIN,
+    });
+
+    helper.allowDynamoDB(fn);
+    helper.allowES(fn);
+
+    const dataSource = this.api.addLambdaDataSource('usersFn', fn);
+
+    dataSource.createResolver({
+      typeName: ResolverType.Query,
+      fieldName: 'users',
     });
   }
 }
