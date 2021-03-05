@@ -5,6 +5,11 @@ import { Duration } from '@aws-cdk/core';
 import { RetentionDays } from '@aws-cdk/aws-logs';
 import { PolicyStatement, Effect } from '@aws-cdk/aws-iam';
 
+export enum ResolverType {
+  Mutation = 'Mutation',
+  Query = 'Query',
+}
+
 export const allowES = (lambdaFunction: lambda.Function) => {
   const esPolicy = new PolicyStatement({ effect: Effect.ALLOW });
   esPolicy.addActions('es:ESHttpGet', 'es:ESHttpHead');
