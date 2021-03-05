@@ -6,7 +6,7 @@ import { FunctionEvent, FieldName, UsersConnection } from './types';
 
 const { MAIN_TABLE_NAME, ES_DOMAIN } = process.env;
 const db = new AWS.DynamoDB.DocumentClient();
-const es = new Client({ node: ES_DOMAIN });
+const es = new Client({ node: `https://${ES_DOMAIN}` });
 
 export const handler: Handler = async (event: FunctionEvent): Promise<UsersConnection> => {
   const {
@@ -19,7 +19,7 @@ export const handler: Handler = async (event: FunctionEvent): Promise<UsersConne
     /**
      * TODO: Implement search in Elasticsearch
      */
-    
+
     return {
       items: [
         {
