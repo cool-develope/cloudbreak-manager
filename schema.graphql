@@ -44,12 +44,51 @@ input InviteFederationOwnerInput {
   type: FederationType
 }
 
+input UsersFilterInput {
+  search: String
+}
+
+type TreezorUser {
+  userId: Int
+  walletId: Int
+  kycReview: String
+}
+
+type LoginActivity {
+  ip: String
+  country: String
+  city: String
+  device: String
+  loginDate: AWSDate
+}
+
+type User {
+  id: ID!
+  email: String
+  firstName: String
+  lastName: String
+  parentUserId: String
+  country: String
+  city: String
+  phone: String
+  phoneCountry: String
+  birthDate: AWSDate
+  createDate: AWSDateTime
+  treezor: TreezorUser
+  recentActivity: [LoginActivity]
+}
+
 type InviteClubOwnerPayload {
   errors: [String]
 }
 
 type InviteFederationOwnerPayload {
   errors: [String]
+}
+
+type UsersConnection {
+  items: [User]
+  totalCount: Int
 }
 
 type Mutation {
@@ -60,5 +99,6 @@ type Mutation {
 }
 
 type Query {
-  test: String
+  users(filter: UsersFilterInput, limit: Int, from: Int): UsersConnection!
+    @aws_auth(cognito_groups: ["tifo-manager"])
 }
