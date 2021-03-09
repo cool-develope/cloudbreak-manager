@@ -59,7 +59,7 @@ type LoginActivity {
   country: String
   city: String
   device: String
-  loginDate: AWSDate
+  loginDate: AWSDateTime
 }
 
 type User {
