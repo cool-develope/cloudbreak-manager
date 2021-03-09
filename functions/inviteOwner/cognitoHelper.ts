@@ -1,5 +1,6 @@
 // @ts-ignore
 import * as AWS from 'aws-sdk';
+// @ts-ignore
 import { generate } from 'generate-password';
 
 const cognito = new AWS.CognitoIdentityServiceProvider();
