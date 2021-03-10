@@ -38,6 +38,9 @@ class UserInformations {
         },
       });
 
+
+      console.log("Recent user login acitivities: ", result);
+
       return result;
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));
@@ -100,6 +103,9 @@ class UserInformations {
 
   getUsers = async (filter: {}, limit: number, from: number) =>  {
     const esResult = await this.esSearch(filter, limit, from);
+
+    console.log("User list: ", esResult);
+
     const totalCount = esResult.body?.hits.total.value || 0;
     return this.prepareEsItems(esResult.body?.hits.hits, totalCount);
   };
