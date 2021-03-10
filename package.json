@@ -28,6 +28,7 @@
     "@aws-cdk/aws-lambda": "^1.80.0",
     "@aws-cdk/aws-route53-targets": "^1.80.0",
     "@aws-cdk/core": "^1.80.0",
+    "@elastic/elasticsearch": "^7.11.0",
     "@types/aws-lambda": "^8.10.68",
     "dotenv": "^8.2.0",
     "source-map-support": "^0.5.16"
