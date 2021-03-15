@@ -37,10 +37,7 @@ class UserInformations {
           ...queryFilter,
         },
       });
-
-
-      console.log("Recent user login acitivities: ", result);
-
+      
       return result;
     } catch (err) {
       console.error(JSON.stringify(err, null, 2));
@@ -94,7 +91,7 @@ class UserInformations {
             walletId: treezorWalletId,
             kycReview
           },
-          recentActivity: recentActivity.map((item: any) => this.getTypeUser(item))
+          recentActivity: (recentActivity || []).map((item: any) => this.getTypeUser(item))
         };
       }),
       totalCount
