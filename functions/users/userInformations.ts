@@ -18,6 +18,7 @@ class UserInformations {
       KeyConditionExpression: keyConditionExpression || 'pk = :pk and begins_with(sk, :sk)',
       ExpressionAttributeValues: {
         ':pk': pk,
+        ':sk': 'login#'
       },
       Limit: 20,
       ScanIndexForward: false
@@ -55,15 +56,15 @@ class UserInformations {
 
   private async prepareEsItems(items: any[] = [], totalCount: number) {
     const activityPromises = items.map(({_id }) => this.queryItems(`user#${_id}`));
-    const acitvities = await Promise.all(activityPromises);
+    const activities = await Promise.all(activityPromises);
     
-    console.log("Recent Activities: ", acitvities);
+    console.log("Recent Activities: ", activities);
 
     const recentActivities = new Map();
 
     
-    for (const userItems of acitvities) {
-      if (userItems) {
+    for (const userItems of activities) {
+      if (userItems?.length > 0) {
         const id = userItems[0].pk.replace('user#', '');
         recentActivities.set(id, userItems.map((item: any) => this.getTypeUser(item)));
       }
