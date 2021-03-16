@@ -116,8 +116,11 @@ class UserInformations {
     const esResult = await this.esSearch(filter, limit, from);
 
     console.log("User list: ", esResult);
-
+    
     const totalCount = esResult.body?.hits.total.value || 0;
+
+    console.log("User list: ", esResult.body?.hits.hits, totalCount);
+
     return this.prepareEsItems(esResult.body?.hits.hits, totalCount);
   };
 }
