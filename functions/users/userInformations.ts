@@ -62,10 +62,10 @@ class UserInformations {
     const recentActivities = new Map();
 
     
-    for (const items of acitvities) {
-      if (items) {
-        const id = items[0].pk.replace('user#', '');
-        recentActivities.set(id, items.map((item: any) => this.getTypeUser(item)));
+    for (const userItems of acitvities) {
+      if (userItems) {
+        const id = userItems[0].pk.replace('user#', '');
+        recentActivities.set(id, userItems.map((item: any) => this.getTypeUser(item)));
       }
     }
 
