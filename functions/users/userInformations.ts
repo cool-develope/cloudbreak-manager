@@ -18,6 +18,7 @@ class UserInformations {
       KeyConditionExpression: keyConditionExpression || 'pk = :pk and begins_with(sk, :sk)',
       ExpressionAttributeValues: {
         ':pk': pk,
+        ':sk': 'login#'
       },
       Limit: 20,
       ScanIndexForward: false
@@ -63,7 +64,7 @@ class UserInformations {
 
     
     for (const userItems of acitvities) {
-      if (userItems) {
+      if (userItems?.length > 0) {
         const id = userItems[0].pk.replace('user#', '');
         recentActivities.set(id, userItems.map((item: any) => this.getTypeUser(item)));
       }
