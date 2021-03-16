@@ -54,6 +54,21 @@ class UserInformations {
   });
 
   private async prepareEsItems(items: any[] = [], totalCount: number) {
+    const activityPromises = items.map(({_id }) => this.queryItems(`user#${_id}`));
+    const acitvities = await Promise.all(activityPromises);
+    
+    console.log("Recent Activities: ", acitvities);
+
+    const recentActivities = new Map();
+
+    
+    for (const userItems of acitvities) {
+      if (userItems) {
+        const id = userItems[0].pk.replace('user#', '');
+        recentActivities.set(id, userItems.map((item: any) => this.getTypeUser(item)));
+      }
+    }
+
     return {
       items: items.map(({ _id, _source }) => {
         const {
@@ -72,8 +87,6 @@ class UserInformations {
           kycReview,
         } = _source;
 
-        const recentActivity = this.queryItems(`user#${_id}`);
-
         return {
           id: _id,
           email,
@@ -91,7 +104,7 @@ class UserInformations {
             walletId: treezorWalletId,
             kycReview
           },
-          recentActivity: (recentActivity || []).map((item: any) => this.getTypeUser(item))
+          recentActivity: (recentActivities.get(_id) || [])
         };
       }),
       totalCount
