@@ -29,7 +29,7 @@ class UserInformations {
   };
   
   esSearch = async (query: any, limit: number, from: number) => {
-    const queryFilter = query ? { query } : null;
+    const queryFilter = query ? query : null;
     
     try {
       const result = await this.es.search({
