@@ -58,6 +58,31 @@ export interface User {
   recentActivity: LoginActivity[];
 }
 
+export enum TeamMemberType {
+  Member = 'Member',
+  Coach = 'Coach',
+}
+
+export enum TeamInvitationStatus {
+  Pending = 'Pending',
+  Accepted = 'Accepted',
+  Declined = 'Declined',
+}
+export interface UsersFilter {
+  search?: string;
+  clubIds?: string[];
+  teamIds?: string[];
+  userIds?: string[];
+  friendId?: string;
+  hasWallet?: boolean;
+  role?: TeamMemberType;
+  status?: TeamInvitationStatus;
+  createDateAfter?: string;
+  createDateBefore?: string;
+  birthDateAfter?: string;
+  birthDateBefore?: string;
+}
+
 export interface UsersConnection {
   items: User[];
   totalCount: number;
