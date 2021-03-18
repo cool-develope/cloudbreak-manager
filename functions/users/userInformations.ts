@@ -34,8 +34,8 @@ class UserInformations {
       ? {
           query: {
             query_string: {
-              query,
-              default_field: "*",
+              query: `*${query}*`,
+              fields: ["firstName", "lastName", "email", "phone"],
             },
           },
         }
