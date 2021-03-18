@@ -12,6 +12,10 @@ export interface FunctionEvent {
   info: { fieldName: FieldName };
 }
 
+export interface UserFilterInput {
+  search?: string;
+}
+
 export interface CognitoClaims {
   sub: string;
   aud: string;

@@ -1,6 +1,7 @@
 // @ts-ignore
 import * as AWS from "aws-sdk";
 import { Client } from "@elastic/elasticsearch";
+import { UserFilterInput } from "./types";
 
 class UserInformations {
   private readonly db: AWS.DynamoDB.DocumentClient = new AWS.DynamoDB.DocumentClient();
@@ -27,10 +28,19 @@ class UserInformations {
 
     return this.db.query(params).promise();
   };
-  
-  esSearch = async (query: any, limit: number, from: number) => {
-    const queryFilter = query ? query : null;
-    
+
+  esSearch = async (query: string, limit: number, from: number) => {
+    const queryFilter = query
+      ? {
+          query: {
+            query_string: {
+              query,
+              default_field: "*",
+            },
+          },
+        }
+      : null;
+
     try {
       const result = await this.es.search({
         index: "users",
@@ -67,11 +77,11 @@ class UserInformations {
     const recentActivities = new Map();
 
     for (const userItems of activities) {
-      if (userItems?.length > 0) {
-        const id = userItems[0].pk.replace("user#", "");
+      if (userItems.Items?.length > 0) {
+        const id = userItems.Items[0].pk.replace("user#", "");
         recentActivities.set(
           id,
-          userItems.map((item: any) => this.getTypeUser(item))
+          userItems.Items.map((item: any) => this.getTypeUser(item))
         );
       }
     }
@@ -118,15 +128,17 @@ class UserInformations {
     };
   }
 
-  getUsers = async (filter: any, limit: number, from: number) => {
-
-    const esResult = await this.esSearch(filter, limit, from);
+  getUsers = async (
+    filter: UserFilterInput = {},
+    limit: number,
+    from: number
+  ) => {
+    const { search = "" } = filter;
+    const esResult = await this.esSearch(search, limit, from);
 
     console.log("User list:  ", esResult);
 
     const totalCount = esResult.body?.hits.total.value || 0;
-
-    console.log("User list:  ", esResult.body?.hits.hits, totalCount);
 
     return this.prepareEsItems(esResult.body?.hits.hits, totalCount);
   };
