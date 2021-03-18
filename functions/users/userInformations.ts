@@ -63,7 +63,7 @@ class UserInformations {
     country,
     city,
     device: deviceOS,
-    loginDate: sk.replace("login#", ""),
+    loginDate: new Date(parseInt(sk.replace("login#", ""))).toISOString(),
   });
 
   private async prepareEsItems(items: any[] = [], totalCount: number) {
