@@ -86,44 +86,50 @@ class UserInformations {
       }
     }
 
-    return {
-      items: items.map(({ _id, _source }) => {
-        const {
-          email,
-          firstName,
-          lastName,
-          parentUserId,
-          country,
-          city,
-          phone,
-          phoneCountry,
-          birthDate,
-          createdAt,
-          treezorUserId,
-          treezorWalletId,
-          kycReview,
-        } = _source;
+    let userItems = items.map(({ _id, _source }) => {
+      const {
+        email,
+        firstName,
+        lastName,
+        parentUserId,
+        country,
+        city,
+        phone,
+        phoneCountry,
+        birthDate,
+        createdAt,
+        treezorUserId,
+        treezorWalletId,
+        kycReview,
+      } = _source;
 
-        return {
-          id: _id,
-          email,
-          firstName,
-          lastName,
-          parentUserId,
-          country,
-          city,
-          phone,
-          phoneCountry,
-          birthDate,
-          createDate: createdAt,
-          treezor: {
-            userId: treezorUserId,
-            walletId: treezorWalletId,
-            kycReview,
-          },
-          recentActivity: recentActivities.get(_id) || [],
-        };
-      }),
+      return {
+        id: _id,
+        email,
+        firstName,
+        lastName,
+        parentUserId,
+        country,
+        city,
+        phone,
+        phoneCountry,
+        birthDate,
+        createDate: createdAt,
+        treezor: {
+          userId: treezorUserId,
+          walletId: treezorWalletId,
+          kycReview,
+        },
+        recentActivity: recentActivities.get(_id) || [],
+      };
+    });
+    userItems.sort(
+      // @ts-ignore
+      (a, b) => new Date(b.createDate ? b.createDate : 0) - new Date(a.createDate ? a.createDate : 0)
+    );
+
+    return {
+      items: userItems,
       totalCount,
     };
   }
