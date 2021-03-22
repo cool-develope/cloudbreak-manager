@@ -40,7 +40,7 @@ export const allowDynamoDB = (lambdaFunction: lambda.Function) => {
     'dynamodb:UpdateItem',
     'dynamodb:DeleteItem'
   );
-  dbPolicy.addResources('arn:aws:dynamodb:eu-central-1:986160130918:table/*');
+  dbPolicy.addResources('arn:aws:dynamodb:eu-central-1:596882852595:table/*');
 
   lambdaFunction.addToRolePolicy(dbPolicy);
 };
