@@ -48,6 +48,7 @@ class UserInformations {
           from,
           size: limit,
           ...queryFilter,
+          sort: [{ 'createdAt': 'desc' }],
         },
       });
 
@@ -86,7 +87,9 @@ class UserInformations {
       }
     }
 
-    let userItems = items.map(({ _id, _source }) => {
+    let userItems = items.filter( ({_source : { isDeleted }}) => {
+      return !(isDeleted == true || isDeleted == 'true');
+    }).map(({ _id, _source }) => {
       const {
         email,
         firstName,
@@ -123,10 +126,6 @@ class UserInformations {
         recentActivity: recentActivities.get(_id) || [],
       };
     });
-    userItems.sort(
-      // @ts-ignore
-      (a, b) => new Date(b.createDate ? b.createDate : 0) - new Date(a.createDate ? a.createDate : 0)
-    );
 
     return {
       items: userItems,

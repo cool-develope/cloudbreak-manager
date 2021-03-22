@@ -43,23 +43,23 @@ export class AppStack extends cdk.Stack {
     const domain = `manager.${ZONE_NAME}`;
     const bucketRefererHeader = 'cccy6qoNAILX9okX607t';
 
-    const bucket = this.createS3Bucket(MANAGE_WEB_BUCKET_NAME, bucketRefererHeader);
+    // const bucket = this.createS3Bucket(MANAGE_WEB_BUCKET_NAME, bucketRefererHeader);
     /**
      * Create CloudFront
      */
-    const certificate = Certificate.fromCertificateArn(this, 'us-certificate', US_CERTIFICATE_ARN);
+    // const certificate = Certificate.fromCertificateArn(this, 'us-certificate', US_CERTIFICATE_ARN);
 
-    const distribution = this.createCloudFrontDistribution(
-      bucket.bucketWebsiteDomainName,
-      domain,
-      certificate,
-      bucketRefererHeader
-    );
+    // const distribution = this.createCloudFrontDistribution(
+    //   bucket.bucketWebsiteDomainName,
+    //   domain,
+    //   certificate,
+    //   bucketRefererHeader
+    // );
 
     /**
      * Add record to Route53
      */
-    this.createDomainRecord(ZONE_ID, ZONE_NAME, domain, distribution);
+    // this.createDomainRecord(ZONE_ID, ZONE_NAME, domain, distribution);
 
     const userPool = cognito.UserPool.fromUserPoolId(this, 'apiUserPool', COGNITO_USERPOOL_ID);
     this.api = this.createAppSync(userPool);

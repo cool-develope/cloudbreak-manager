@@ -8,7 +8,7 @@ const { MAIN_TABLE_NAME = '', ES_DOMAIN = '' } = process.env;
 export const handler: Handler = async (event: FunctionEvent): Promise<UsersConnection> => {
   const {
     arguments: { filter = {}, limit = 10, from = 0 },
-    identity: { sub, claims },
+    // identity: { sub, claims },
     info: { fieldName },
   } = event;
 
