@@ -93,12 +93,12 @@ type UsersConnection {
 
 type Mutation {
   inviteClubOwner(input: InviteClubOwnerInput!): InviteClubOwnerPayload!
-    @aws_auth(cognito_groups: ["tifo-manager"])
+    @aws_auth(cognito_groups: ["Cloudbreak-manager"])
   inviteFederationOwner(input: InviteFederationOwnerInput!): InviteFederationOwnerPayload!
-    @aws_auth(cognito_groups: ["tifo-manager"])
+    @aws_auth(cognito_groups: ["Cloudbreak-manager"])
 }
 
 type Query {
   users(filter: UsersFilterInput, limit: Int, from: Int): UsersConnection!
-    @aws_auth(cognito_groups: ["tifo-manager"])
+    @aws_auth(cognito_groups: ["Cloudbreak-manager"])
 }

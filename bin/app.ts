@@ -5,7 +5,7 @@ import { AppStack } from '../lib/app-stack';
 import * as dotenv from 'dotenv';
 
 dotenv.config({
-  path: `.env.${process.env.TIFO_ENV || 'dev'}`,
+  path: `.env.${process.env.Cloudbreak_ENV || 'dev'}`,
 });
 
 const app = new cdk.App();

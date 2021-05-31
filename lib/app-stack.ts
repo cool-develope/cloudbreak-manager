@@ -135,7 +135,7 @@ export class AppStack extends cdk.Stack {
   }
 
   createDomainRecord(zoneId: string, zoneName: string, domain: string, distribution: CloudFrontWebDistribution) {
-    const hostedZone = route53.HostedZone.fromHostedZoneAttributes(this, 'zone-tifo-sport', {
+    const hostedZone = route53.HostedZone.fromHostedZoneAttributes(this, 'zone-Cloudbreak-sport', {
       hostedZoneId: zoneId,
       zoneName,
     });
@@ -152,7 +152,7 @@ export class AppStack extends cdk.Stack {
     const fn = helper.getFunction(this, 'inviteOwner', {
       MAIN_TABLE_NAME: this.mainTableName,
       IMAGES_DOMAIN: this.imagesDomain,
-      SES_FROM_ADDRESS: 'Tifo <no-reply@tifo-sport.com>',
+      SES_FROM_ADDRESS: 'Cloudbreak <no-reply@Cloudbreak-sport.com>',
       SES_REGION: 'eu-west-1',
       SIGNIN_WEB_URL: this.signinWebUrl,
       COGNITO_USERPOOL_ID: this.cognitoUserpoolId,
